@@ -1082,29 +1082,6 @@ nbdist/
 *.tmproject
 tmtags
 
-### ModelSim template
-# ignore ModelSim generated files and directories (temp files and so on)
-[_@]*
-
-# ignore compilation output of ModelSim
-*.mti
-*.dat
-*.dbs
-*.psm
-*.cmp
-*.html
-*.bsf
-
-# ignore simulation output of ModelSim
-wlf*
-*.wlf
-*.vstf
-*.ucdb
-cov*/
-transcript*
-sc_dpiheader.h
-vsim.dbg
-
 ### Vim template
 # Swap
 [._]*.s[a-v][a-z]

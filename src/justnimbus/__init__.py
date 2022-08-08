@@ -1,6 +1,6 @@
 import requests
 
-from justnimbus.exceptions import InvalidClientID
+from justnimbus.exceptions import InvalidClientID, JustNimbusError
 from justnimbus.model import JustNimbusModel
 
 
@@ -16,6 +16,6 @@ class JustNimbusClient:
         except requests.HTTPError as error:
             if response.status_code == 404:
                 raise InvalidClientID(client_id=self._client_id) from error
-            raise error
+            raise JustNimbusError() from error
 
         return JustNimbusModel.from_dict(response.json())

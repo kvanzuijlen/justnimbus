@@ -4,7 +4,7 @@ from datetime import datetime
 
 @dataclasses.dataclass
 class JustNimbusModel:
-    api_version: float
+    api_version: str
     system_last_update: datetime
     system_flow: str
     reservoir_capacity: float
@@ -18,14 +18,21 @@ class JustNimbusModel:
     @classmethod
     def from_dict(cls, data: dict):
         return JustNimbusModel(
-            api_version=float(data["api_version"]),
+            api_version=str(data["api_version"]),
             system_last_update=datetime.fromisoformat(data["system_last_update"]),
-            system_flow=data["system_flow"],
-            reservoir_capacity=float(data["reservoir_capacity"]),
-            reservoir_content=float(data["reservoir_content"]),
-            reservoir_temp=float(data["reservoir_temp"]),
+            system_flow=str(data["system_flow"]),
+            reservoir_capacity=_to_float(data["reservoir_capacity"]),
+            reservoir_content=_to_float(data["reservoir_content"]),
+            reservoir_temp=_to_float(data["reservoir_temp"]),
             pump_type=str(data["pump_type"]),
-            pump_pressure=float(data["pump_pressure"]),
-            water_saved=float(data["water_saved"]),
-            water_used=float(data["water_used"]),
+            pump_pressure=_to_float(data["pump_pressure"]),
+            water_saved=_to_float(data["water_saved"]),
+            water_used=_to_float(data["water_used"]),
         )
+
+
+def _to_float(value: str) -> float | None:
+    try:
+        return float(value)
+    except ValueError:
+        return None

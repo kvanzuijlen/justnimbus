@@ -34,5 +34,5 @@ class JustNimbusModel:
 def _to_float(value: str) -> float | None:
     try:
         return float(value)
-    except ValueError:
+    except (ValueError, TypeError):
         return None
